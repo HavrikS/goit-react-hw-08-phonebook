@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import css from 'components/App.module.css'
+import { nanoid } from 'nanoid'
 
 
 export class App extends Component {
@@ -9,20 +10,26 @@ export class App extends Component {
   name: ''
 }
 
-  // handleChange = event => {
-  //   const { name } = event.currentTarget;
+  handleChange = event => {
+    this.setState({
+      contacts: nanoid(),
+      name: event.target.value
+    });
+  };
 
-
-  // };
-
-  // handleSubmit = event => {
-  //   const { name } = event.currentTarget;
-
-  // };
+  handleSubmit = event => {
+    event.preventDefault();
+    console.log(this.state);
+    this.setState({
+      name: ''
+    });
+  };
+  
 
 
   render() {
-    const {name} = this.state.name
+    const { name } = this.state
+    console.log(this.state);
     return (      
       <div className={css.container}>
         <h2>Phonebook</h2> 
