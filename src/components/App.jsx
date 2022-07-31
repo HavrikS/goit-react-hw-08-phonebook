@@ -1,54 +1,44 @@
 import React, { Component } from 'react'
+import  ContactForm  from './ContactForm/ContactForm';
 import css from 'components/App.module.css'
-import { nanoid } from 'nanoid'
 
 
-export class App extends Component {
+
+class App extends Component {
   
   state = {
   contacts: [],
-  name: ''
+  filter: '',  
 }
-
-  handleChange = event => {
-    this.setState({
-      contacts: nanoid(),
-      name: event.target.value
+  handleChangeFilter = event => {
+    const { name, value } = event.target;
+    this.setState({      
+      [name]: value
     });
-  };
+  }
 
-  handleSubmit = event => {
-    event.preventDefault();
-    console.log(this.state);
-    this.setState({
-      name: ''
-    });
-  };
-  
+  formSubmitHendler = data => {
+    this.setState({ contacts:  data })
+  }
 
-
-  render() {
-    const { name } = this.state
-    console.log(this.state);
+  render() {     
     return (      
       <div className={css.container}>
-        <h2>Phonebook</h2> 
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name
-            <input
+        <h1>Phonebook</h1> 
+        <ContactForm onSubmit={this.formSubmitHendler} />
+        <h2>Contacts</h2>
+        <p>Find contacts by name</p>
+        <input
               type="text"
-              name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-              value={name}
-              onChange={this.handleChange}
+              name="filter"             
+              value={this.state.filter}
+              onChange={this.handleChangeFilter}
             />
-          </label>
-          <button type="submit">Add contact</button>
-        </form>
-        <p>Contacts</p>
+        <ul>
+          {(this.state.contacts).filter(contact => contact.name.toLowerCase()
+            .includes(this.state.filter.toLowerCase()))
+            .map((contact) => <li key={contact.id}>{contact.name}: {contact.number}</li>)}
+        </ul>
       </div>
     );
   }
