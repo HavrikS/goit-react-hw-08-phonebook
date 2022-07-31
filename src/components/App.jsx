@@ -27,14 +27,23 @@ class App extends Component {
 
   formSubmitHendler = data => {  
     const { name, number } = data;
-    const newContacts = {
+    if (this.state.contacts.find(contact => contact.name === name)) {
+      alert(`${name} is alreadi in contacts.`);
+    } else
+    {const newContacts = {
         id: nanoid(),
         name: name,
         number: number
-    };
+    };    
     this.setState(prevState => ({
         contacts: [newContacts, ...prevState.contacts]
-    }) );    
+    }));}    
+  }
+
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId)
+    }))
   }
 
 
@@ -56,7 +65,7 @@ class App extends Component {
         <ContactForm onSubmit={this.formSubmitHendler} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.handleChangeFilter} />
-        <ContactList options={visibleContacts}/>
+        <ContactList options={visibleContacts} onDeleteContact={this.deleteContact} />
       </div>
     );
   }
