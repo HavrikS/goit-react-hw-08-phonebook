@@ -1,33 +1,39 @@
-import React, { Component } from 'react'
+import  { useState } from 'react'
 import css from 'components/ContactForm/ContactForm.module.css'
 
-class ContactForm extends Component {
 
-state = {    
-    name: '',
-    number: ''
-};
+const ContactForm = ({onSubmit}) => {
 
-handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-        [name]: value
-    });
-};
+const [name, setName] = useState('');
+const [number, setNumber] = useState('');
 
-handleSubmit = event => {
+
+const data = {
+    "name": name,
+    "number": number
+}
+
+    
+const handleChangeName = event => {
+    const { value } = event.target;
+    setName(value)
+    };
+    
+const handleChangeNumber = event => {
+    const { value } = event.target;
+    setNumber(value)
+    };
+
+const handleSubmit = event => {
     event.preventDefault();    
-    this.props.onSubmit(this.state)
-    this.setState({
-        name: '',
-        number: ''
-    });
+    onSubmit(data);
+    setName('');
+    setNumber('');
 };
 
 
-render() {     
-return (   
-    <form className={css.contactForm} onSubmit={this.handleSubmit}>
+return (
+    <form className={css.contactForm} onSubmit={handleSubmit}>
         <label className={css.contactLabel}>
         Name
         <input
@@ -37,8 +43,8 @@ return (
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            value={this.state.name}
-            onChange={this.handleChange}
+            value={name}
+            onChange={handleChangeName}
         />
         </label>
         <label className={css.contactLabel}>
@@ -50,15 +56,23 @@ return (
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={this.state.number}
-            onChange={this.handleChange}
+            value={number}
+            onChange={handleChangeNumber}
         />
         </label>
         <button className={css.contactButton} type="submit">Add contact</button>
-    </form>        
+    </form>
 );
 }
-}
+
 
 
 export default ContactForm;
+
+
+
+//   const options = [
+//     { name: "good", setter: setGood },
+//     { name: "neutral", setter: setNeutral },
+//     { name: "bad", setter: setBad }];
+  
