@@ -1,4 +1,4 @@
-import  { useState } from 'react'
+import  { useState, useRef } from 'react'
 import PropTypes from 'prop-types';
 import css from 'components/ContactForm/ContactForm.module.css'
 
@@ -8,6 +8,10 @@ const ContactForm = ({ onSubmit }) => {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
 
+    const inputName = useRef(null);
+    const inputNumber = useRef(null);
+
+
 
     const data = {
         "name": name,
@@ -16,14 +20,12 @@ const ContactForm = ({ onSubmit }) => {
     
 
     
-    const handleChangeName = event => {
-        const { value } = event.target;
-        setName(value)
+    const handleChangeName = () => {        
+        setName(inputName.current.value)
     };
     
-    const handleChangeNumber = event => {
-        const { value } = event.target;
-        setNumber(value)
+    const handleChangeNumber = () => {
+                setNumber(inputNumber.current.value)
     };
 
     const handleSubmit = event => {
@@ -46,6 +48,7 @@ const ContactForm = ({ onSubmit }) => {
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                     required
                     value={name}
+                    ref={inputName}
                     onChange={handleChangeName}
                 />
             </label>
@@ -59,6 +62,7 @@ const ContactForm = ({ onSubmit }) => {
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     required
                     value={number}
+                    ref={inputNumber}
                     onChange={handleChangeNumber}
                 />
             </label>
