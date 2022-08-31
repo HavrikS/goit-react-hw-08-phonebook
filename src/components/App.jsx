@@ -12,8 +12,7 @@ import { nanoid } from 'nanoid'
 const App = () => {
 
   const reduxContacts = useSelector(state => state.contacts.items);
-  const reduxFilter = useSelector(state => state.contacts.filter);
-  console.log(reduxContacts);
+  const reduxFilter = useSelector(state => state.contacts.filter);  
   const dispatch = useDispatch()
   
   

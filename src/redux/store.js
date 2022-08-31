@@ -25,6 +25,8 @@ export const store = configureStore({
     },
 })
 
+////////......another way
+
 // const itemsReducer = createReducer([], {
 //     [addContact]: (state, action) => [action.payload, ...state],
 //     [deleteStoreContact]: (state, action) => state.filter(contact => contact.id !== action.payload),
