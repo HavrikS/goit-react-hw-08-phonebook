@@ -12,10 +12,10 @@ const initial = {
 }
 
 const contactsReducer = createReducer(initial, {
-    [addContact]: (state, action) => state = ({ ...state, items: [action.payload, ...state.items]}),
-    [deleteStoreContact]: (state, action) => state = ({...state, items: state.items.filter(contact => contact.id !== action.payload)}),
-    [addLocalContact]: (state, action) => state = ({ ...state, items: [...action.payload, ...state.items]}),
-    [addFilter]: (state, action) => state = ({ ...state, filter: action.payload }),
+    [addContact]: (state, action) => ({ ...state, items: [action.payload, ...state.items]}),
+    [deleteStoreContact]: (state, action) => ({...state, items: state.items.filter(contact => contact.id !== action.payload)}),
+    [addLocalContact]: (state, action) => ({ ...state, items: [...action.payload, ...state.items]}),
+    [addFilter]: (state, action) => ({ ...state, filter: action.payload }),
 })
 
 
