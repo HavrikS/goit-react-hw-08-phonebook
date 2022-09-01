@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
+
 import { useSelector, useDispatch } from "react-redux";
-import { addContact, deleteStoreContact, addFilter, addLocalContact } from '../redux/store';
+import { addContact, deleteStoreContact, addFilter } from '../redux/store';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import  ContactList  from './ContactList/ContactList';
@@ -46,20 +46,6 @@ const App = () => {
   }
 
 
-
-  useEffect(() => {
-    const storageContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(storageContacts);
-    if (parsedContacts) {
-      dispatch(addLocalContact(parsedContacts))
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-
-  useEffect(() => {    
-    localStorage.setItem('contacts', JSON.stringify(reduxContacts));    
-  }, [reduxContacts]);
 
 
   const visibleContacts = getVisibleContacts()
