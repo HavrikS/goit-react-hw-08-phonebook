@@ -1,8 +1,9 @@
 import React from 'react'
+import Loader from 'components/Loader/Loader'
 import {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeContact, fetchContacts } from '../../redux/operations';
-import { getFilter, getContacts } from '../../redux/selectors';
+import { getFilter, getContacts, getLoading } from '../../redux/selectors';
 import ContactListItem from 'components/ContactListItem/ContactListItem'
 import css from 'components/ContactList/ContactList.module.css'
 
@@ -17,7 +18,8 @@ const ContactList = () => {
     }, [dispatch]);
     
     const reduxContacts = useSelector(getContacts);    
-    const reduxFilter = useSelector(getFilter);      
+    const reduxFilter = useSelector(getFilter); 
+    const loading = useSelector(getLoading);
 
     const getVisibleContacts = () => {
         const normalizedFilter = reduxFilter.toLowerCase();        
@@ -29,12 +31,15 @@ const ContactList = () => {
     };
 
     const visibleContacts = getVisibleContacts()
+     
 
     return (
+        <>{loading && <Loader/>}
     <ul className={css.contactList}>
         {visibleContacts.map((visibleContact) =>
             <ContactListItem key={visibleContact.id} data={visibleContact} deleteContact={deleteContact} />)}
-    </ul>
+            </ul>
+            </>
 )}
 
 export default ContactList;
