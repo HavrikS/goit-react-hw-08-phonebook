@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { addFilter } from './actions';
+import { addFilter } from './filter-actions';
 
 
 

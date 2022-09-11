@@ -2,8 +2,9 @@ import React from 'react'
 import Loader from 'components/Loader/Loader'
 import {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeContact, fetchContacts } from '../../redux/operations';
-import { getFilter, getContacts, getLoading } from '../../redux/selectors';
+import { removeContact, fetchContacts } from '../../redux/contacts/contacts-operations';
+import { getContacts, getLoading } from '../../redux/contacts/contacts-selectors';
+import { getFilter } from '../../redux/filter/filter-selectors';
 import ContactListItem from 'components/ContactListItem/ContactListItem'
 import css from 'components/ContactList/ContactList.module.css'
 
