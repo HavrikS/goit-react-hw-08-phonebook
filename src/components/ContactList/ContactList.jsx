@@ -1,6 +1,7 @@
 import React from 'react'
+import {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteStoreContact } from '../../redux/actions';
+import { removeContact, fetchContacts } from '../../redux/operations';
 import { getFilter, getContacts } from '../../redux/selectors';
 import ContactListItem from 'components/ContactListItem/ContactListItem'
 import css from 'components/ContactList/ContactList.module.css'
@@ -9,18 +10,22 @@ import css from 'components/ContactList/ContactList.module.css'
 
 
 const ContactList = () => {
-    
-    const reduxContacts = useSelector(getContacts);
-    const reduxFilter = useSelector(getFilter);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const getVisibleContacts = () => {    
-        const normalizedFilter = reduxFilter.toLowerCase();
+    useEffect(()=> {
+        dispatch(fetchContacts())        
+    }, [dispatch]);
+    
+    const reduxContacts = useSelector(getContacts);    
+    const reduxFilter = useSelector(getFilter);      
+
+    const getVisibleContacts = () => {
+        const normalizedFilter = reduxFilter.toLowerCase();        
         return reduxContacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter))
     }
 
     const deleteContact = Id => {   
-        dispatch(deleteStoreContact(Id))
+        dispatch(removeContact(Id))
     };
 
     const visibleContacts = getVisibleContacts()

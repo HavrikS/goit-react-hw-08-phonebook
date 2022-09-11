@@ -1,10 +1,8 @@
 import { useState, useRef } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { addContact } from '../../redux/actions';
+import { addContact } from '../../redux/operations';
 import { getContacts } from '../../redux/selectors';
 import css from 'components/ContactForm/ContactForm.module.css'
-import { nanoid } from 'nanoid'
-
 
 const ContactForm = () => {
 
@@ -13,10 +11,10 @@ const ContactForm = () => {
     const dispatch = useDispatch()
 
     const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
+    const [phone, setPhone] = useState('');
 
     const inputName = useRef(null);
-    const inputNumber = useRef(null);
+    const inputPhone = useRef(null);
 
 
     
@@ -25,17 +23,16 @@ const ContactForm = () => {
     };
     
     const handleChangeNumber = () => {
-                setNumber(inputNumber.current.value)
+                setPhone(inputPhone.current.value)
     };
     
     const formSubmitHendler = ()  => {
         if (reduxContacts.find(contact => contact.name === name)) {
         alert(`${name} is alreadi in contacts.`);
         } else
-        {const newContact = {
-            id: nanoid(),
+        {const newContact = {            
             name: name,
-            number: number        
+            phone: phone        
         }; 
         dispatch(addContact(newContact))    
         ;}    
@@ -45,7 +42,7 @@ const ContactForm = () => {
         event.preventDefault();
         formSubmitHendler();
         setName('');
-        setNumber('');
+        setPhone('');
     };
 
 
@@ -75,8 +72,8 @@ const ContactForm = () => {
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     required
-                    value={number}
-                    ref={inputNumber}
+                    value={phone}
+                    ref={inputPhone}
                     onChange={handleChangeNumber}
                 />
             </label>
