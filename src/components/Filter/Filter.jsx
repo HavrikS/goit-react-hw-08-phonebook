@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { addFilter } from '../../redux/filter/filter-actions';
 import { useSelector, useDispatch } from "react-redux";
 import { getFilter } from '../../redux/filter/filter-selectors';
-import css from 'components/Filter/Filter.module.css'
+import styles from 'components/Filter/Filter.module.css'
 
 
 
@@ -19,10 +19,10 @@ const Filter = () => {
 
     const inputEl = useRef(null);
     return (
-    <label className={css.filterLabel}>
+    <label className={styles.filterLabel}>
     Find contacts by name
         <input
-            className={css.filterInput}
+            className={styles.filterInput}
             type="text"
             name="filter"
             value={reduxFilter}

@@ -6,7 +6,7 @@ import { removeContact, fetchContacts } from '../../redux/contacts/contacts-oper
 import { getContacts, getLoading } from '../../redux/contacts/contacts-selectors';
 import { getFilter } from '../../redux/filter/filter-selectors';
 import ContactListItem from 'components/ContactListItem/ContactListItem'
-import css from 'components/ContactList/ContactList.module.css'
+import styles from 'components/ContactList/ContactList.module.css'
 
 
 
@@ -36,7 +36,7 @@ const ContactList = () => {
 
     return (
         <>{loading && <Loader/>}
-    <ul className={css.contactList}>
+    <ul className={styles.contactList}>
         {visibleContacts.map((visibleContact) =>
             <ContactListItem key={visibleContact.id} data={visibleContact} deleteContact={deleteContact} />)}
             </ul>

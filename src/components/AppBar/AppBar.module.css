@@ -1,0 +1,51 @@
+.container {
+    padding: 0 15px;
+    margin: 0 auto;
+    max-width: 1260px;
+    z-index: 1100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #fff;
+    box-sizing: border-box;
+    
+}
+
+.wrapper {     
+    top: 0;
+    left: 0;
+    position: sticky;    
+    background-color: #5514B4;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+        0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+        
+}
+
+.menu {
+    max-width: 100%;
+    display: flex;
+    list-style: none;
+    
+    margin: 0;
+}
+
+.link {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+
+}
+
+.active {
+    color: #e84a5f;
+}
+
+.homeLink {
+    font-size: 24px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+}
