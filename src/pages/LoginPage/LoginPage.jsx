@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import  authOperations  from '../../redux/auth/auth-operation';
+import authOperations from '../../redux/auth/auth-operation';
+
 
 const styles = {
     form: {
@@ -15,8 +16,10 @@ const styles = {
 
 export default function LoginPage() {
     const dispatch = useDispatch();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
 
     const handleChange = ({ target: { name, value } }) => {
         switch (name) {
@@ -40,7 +43,7 @@ export default function LoginPage() {
         <div>
             <h1>Страница логина</h1>
 
-            <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
+            <form onSubmit={handleSubmit} style={styles.form}>
                 <label style={styles.label}>
                     Почта
                     <input

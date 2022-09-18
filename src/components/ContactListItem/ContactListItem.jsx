@@ -4,12 +4,10 @@ import styles from 'components/ContactListItem/ContactListItem.module.css'
 
 
 const ContactListItem = ({ data, deleteContact }) => {
-    const { name, phone
-, id } = data
+    const { name, number, id } = data
     return (<li>
         <div className={styles.contactListItem}>
-        <p>{name}: {phone
-}</p>
+        <p>{name}: {number}</p>
             <button className={styles.contactListButton} onClick={() => deleteContact(id)} type='button'>Delete</button>
             </div>
     </li>)
@@ -23,6 +21,6 @@ ContactListItem.propTypes = {
     data: PropTypes.shape({
             id: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired,
-            phone: PropTypes.string.isRequired       
+            number: PropTypes.string.isRequired       
         })    
 };

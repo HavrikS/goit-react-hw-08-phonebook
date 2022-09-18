@@ -33,7 +33,7 @@ const ContactForm = () => {
         } else
         {const newContact = {            
             name: name,
-            phone: phone        
+            number: phone        
         }; 
         dispatch(addContact(newContact))    
         ;}    

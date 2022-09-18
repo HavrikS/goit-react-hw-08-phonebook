@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import  authOperations  from '../../redux/auth/auth-operation';
+import authOperations from '../../redux/auth/auth-operation';
+
 
 const styles = {
     form: {
@@ -18,6 +19,7 @@ export default function RegisterPage() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
 
     const handleChange = ({ target: { name, value } }) => {
         switch (name) {
