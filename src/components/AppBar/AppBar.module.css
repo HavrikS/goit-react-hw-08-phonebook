@@ -1,7 +1,6 @@
 .container {
-    padding: 0 15px;
     margin: 0 auto;
-    max-width: 1260px;
+    max-width: 100%;
     z-index: 1100;
     display: flex;
     justify-content: space-between;
@@ -40,7 +39,7 @@
 }
 
 .active {
-    color: #e84a5f;
+    color: #e84a5f !important;
     font-weight: 500;
 }
 
