@@ -1,42 +1,78 @@
-import { createSlice } from '@reduxjs/toolkit';
-import authOperations from './auth-operation';
+import { createSlice } from "@reduxjs/toolkit";
+
+import { register, logOut, logIn, fetchCurrentUser, } from "./auth-operation";
 
 const initialState = {
-    user: { name: null, email: null },
-    token: null,
-    isLoggedIn: false,
-    isRefreshingUser: false,
+    user: {},
+    isLogin: false,
+    token: '',
+    loading: false,
+    error: null,
 };
+
 
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     extraReducers: {
-        [authOperations.register.fulfilled](state, action) {
-            state.user = action.payload.user;
-            state.token = action.payload.token;
-            state.isLoggedIn = true;
+        [register.pending]: state => {
+            state.loading = true;
+            state.error = null;
         },
-        [authOperations.logIn.fulfilled](state, action) {
-            state.user = action.payload.user;
-            state.token = action.payload.token;
-            state.isLoggedIn = true;
+        [register.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.user = payload.user;
+            state.token = payload.token;
+            state.isLogin = true;
+            state.error = null;
         },
-        [authOperations.logOut.fulfilled](state) {
-            state.user = { name: null, email: null };
-            state.token = null;
-            state.isLoggedIn = false;
+        [register.rejected]: (state, { payload }) => {
+            state.loading = false;
+            state.error = payload;
         },
-        [authOperations.fetchCurrentUser.pending](state) {
-            state.isRefreshingUser = true;
+        [logIn.pending]: state => {
+            state.loading = true;
+            state.error = null;
         },
-        [authOperations.fetchCurrentUser.fulfilled](state, action) {
-            state.user = action.payload;
-            state.isLoggedIn = true;
-            state.isRefreshingUser = false;
+        [logIn.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.user = payload.user;
+            state.token = payload.token;
+            state.isLogin = true;
+            state.error = null;
         },
-        [authOperations.fetchCurrentUser.rejected](state) {
-            state.isRefreshingUser = false;
+        [logIn.rejected]: (state, { payload }) => {
+            state.loading = false;
+            state.error = payload.message;
+        },
+        [logOut.pending]: state => {
+            state.loading = true;
+            state.error = null;
+        },
+        [logOut.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.user = {};
+            state.token = '';
+            state.isLogin = false;
+            state.error = null;
+        },
+        [logOut.rejected]: (state, { payload }) => {
+            state.loading = false;
+            state.error = payload;
+        },
+        [fetchCurrentUser.pending]: state => {
+            state.loading = true;
+            state.error = null;
+        },
+        [fetchCurrentUser.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.user = payload;
+            state.isLogin = true;
+            state.error = null;
+        },
+        [fetchCurrentUser.rejected]: (state, { payload }) => {
+            state.loading = false;
+            state.error = payload;
         },
     },
 });

@@ -1,18 +1,17 @@
-import axios from "axios";
+import instance from "./auth-api"
 
 
 export const getContacts = async()=> {
-    const {data} = await axios.get("/contacts");    
+    const {data} = await instance.get("/contacts");    
     return data;
 }
 
 export const addContact = async (data) => {
-    console.log(data);
-    const {data: result} = await axios.post("/contacts", data);
+    const {data: result} = await instance.post("/contacts", data);
     return result;
 }
 
 export const removeContact = async (id) => {
-    const {data: result} = await axios.delete(`/contacts/${id}`);
+    const {data: result} = await instance.delete(`/contacts/${id}`);
     return result;
 }
