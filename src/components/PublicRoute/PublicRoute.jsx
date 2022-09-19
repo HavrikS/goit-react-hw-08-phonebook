@@ -5,7 +5,7 @@ import useAuth from '../../shared/hooks/useAuth';
 const PublicRoute = () => {
     const isLogin = useAuth();
 
-    if(isLogin) {
+    if (isLogin) {
         return <Navigate to="/contacts" />
     }
 

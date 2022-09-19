@@ -1,5 +1,5 @@
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import UserMenu from '../UserMenu/UserMenu';
 import useAuth from '../../shared/hooks/useAuth';
 import Container from 'react-bootstrap/Container';
@@ -19,7 +19,7 @@ const AppBar = () => {
       <div className={styles.wrapper}>
         <Container>
         <div className={styles.container}>
-          <h1 to="/contacts" className={styles.homeLink}>The Phone Book</h1>
+          <Link to="/contacts" className={styles.homeLink}>The Phone Book</Link>
           {isLogin ? <UserMenu /> : 
           <ul className={styles.menu}>            
                 <li>

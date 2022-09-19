@@ -1,18 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import authOperations from '../../redux/auth/auth-operation';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 
-const styles = {
-    form: {
-        width: 320,
-    },
-    label: {
-        display: 'flex',
-        flexDirection: 'column',
-        marginBottom: 15,
-    },
-};
 
 export default function RegisterPage() {
     const dispatch = useDispatch();
@@ -44,35 +36,28 @@ export default function RegisterPage() {
 
     return (
         <div>            
-                <h1>Страница регистрации</h1>
-            <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-                <label style={styles.label}>
-                    Имя
-                    <input type="text" name="name" value={name} onChange={handleChange} />
-                </label>
+            <h1>Register</h1>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicText">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" value={name} name="name" placeholder="Enter name" onChange={handleChange} required/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" value={email} name="email" placeholder="Enter email" onChange={handleChange} required/>
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                    </Form.Text>
+                </Form.Group>
 
-                <label style={styles.label}>
-                    Почта
-                    <input
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={handleChange}
-                    />
-                </label>
-
-                <label style={styles.label}>
-                    Пароль
-                    <input
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={handleChange}
-                    />
-                </label>
-
-                <button type="submit">Зарегистрироваться</button>
-            </form>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" value={password} name="password" placeholder="Password" onChange={handleChange} required/>
+                </Form.Group>                
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
         </div>
     );
 }

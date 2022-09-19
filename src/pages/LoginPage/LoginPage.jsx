@@ -39,7 +39,7 @@ export default function LoginPage() {
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" value={email} name="email" placeholder="Enter email" onChange={handleChange} />
+                    <Form.Control type="email" value={email} name="email" placeholder="Enter email" onChange={handleChange} required/>
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
@@ -47,7 +47,7 @@ export default function LoginPage() {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" value={password} name="password" placeholder="Password" onChange={handleChange} />
+                    <Form.Control type="password" value={password} name="password" placeholder="Password" onChange={handleChange} required/>
                 </Form.Group>                
                 <Button variant="primary" type="submit">
                     Submit

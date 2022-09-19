@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { addFilter } from '../../redux/filter/filter-actions';
 import { useSelector, useDispatch } from "react-redux";
 import { getFilter } from '../../redux/filter/filter-selectors';
-import styles from 'components/Filter/Filter.module.css'
+import Form from 'react-bootstrap/Form';
 
 
 
@@ -19,17 +19,12 @@ const Filter = () => {
 
     const inputEl = useRef(null);
     return (
-    <label className={styles.filterLabel}>
-    Find contacts by name
-        <input
-            className={styles.filterInput}
-            type="text"
-            name="filter"
-            value={reduxFilter}
-            ref={inputEl}
-            onChange={handleChangeFilter}
-        />
-    </label>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Find contacts by name</Form.Label>
+                <Form.Control type="text" value={reduxFilter} placeholder="Enter name" name="filter" ref={inputEl} onChange={handleChangeFilter} />               
+            </Form.Group>
+
 )}
 
 export default Filter;
