@@ -1,6 +1,6 @@
 import {createSlice, combineReducers} from "@reduxjs/toolkit";
 
-import { fetchContacts, addContact, removeContact } from "./contacts-operations";
+import { fetchContacts, addContact, removeContact, patchContact} from "./contacts-operations";
 
 const itemsSlice = createSlice({
     name: "items",
@@ -8,7 +8,8 @@ const itemsSlice = createSlice({
     extraReducers: {
         [fetchContacts.fulfilled]: (_, {payload}) => payload,
         [addContact.fulfilled]: (store, {payload}) => [...store, payload],
-        [removeContact.fulfilled]: (store, {payload}) => store.filter(item => item.id !== payload),
+        [removeContact.fulfilled]: (store, { payload }) => store.filter(item => item.id !== payload),
+        [patchContact.fulfilled]: (store, { payload }) => [...store.filter(item => item.id !== payload.id), payload],        
     }
 });
 
@@ -25,6 +26,9 @@ const loadingSlice = createSlice({
         [removeContact.pending]: () => true,
         [removeContact.fulfilled]: () => false,
         [removeContact.rejected]: () => false,
+        [patchContact.pending]: () => true,
+        [patchContact.fulfilled]: () => false,
+        [patchContact.rejected]: () => false,
     }
 });
 
@@ -37,7 +41,9 @@ const errorSlice = createSlice({
         [addContact.pending]: () => null,
         [addContact.rejected]: (_, {payload}) => payload,
         [removeContact.pending]: () => null,
-        [removeContact.rejected]: (_, {payload}) => payload,
+        [removeContact.rejected]: (_, { payload }) => payload,
+        [patchContact.pending]: () => null,
+        [patchContact.rejected]: (_, {payload}) => payload,
     }
 });
 

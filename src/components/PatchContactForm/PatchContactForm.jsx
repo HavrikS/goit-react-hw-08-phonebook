@@ -1,17 +1,17 @@
 import { useState } from 'react'
-import { useSelector, useDispatch } from "react-redux";
-import { addContact } from '../../redux/contacts/contacts-operations';
-import { getContacts } from '../../redux/contacts/contacts-selectors';
+import { useDispatch } from "react-redux";
+import { patchContact } from '../../redux/contacts/contacts-operations';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Notiflix from 'notiflix';
 
 
-const ContactForm = () => {
 
-    
-    const reduxContacts = useSelector(getContacts);    
+
+const PatchContactForm = (props) => {
+
+
     const dispatch = useDispatch()
+
 
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -28,21 +28,21 @@ const ContactForm = () => {
     };
 
     
-    const formSubmitHendler = ()  => {
-        if (reduxContacts.find(contact => contact.name === name)) {
-        Notiflix.Notify.failure(`${name} is alreadi in contacts.`);
-        } else
-        {const newContact = {            
+    const formSubmitHendler = (id)  => {
+        const newContact = {            
             name: name,
             number: phone        
-        }; 
-        dispatch(addContact(newContact))    
-        ;}    
+        };
+        const data = {
+            newContact: newContact,
+            id: id
+        }
+        dispatch(patchContact(data))          
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = (event, id) => {
         event.preventDefault();
-        formSubmitHendler();
+        formSubmitHendler(id);
         setName('');
         setPhone('');
     };
@@ -51,7 +51,7 @@ const ContactForm = () => {
 
     return (
 
-        <Form onSubmit={handleSubmit}>
+        <Form  onSubmit={(event) => handleSubmit(event, props.contactId)}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
                 <Form.Control type="text" value={name} name="name" placeholder="Enter name" onChange={handleChange} pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$" required/>
@@ -67,13 +67,12 @@ const ContactForm = () => {
                     "Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                 </Form.Text>
             </Form.Group>
-            <Button variant="outline-success" type="submit">
-                Add contact
+            <Button  onClick={() => props.onHide()} variant="outline-success" type="submit">
+                Patch contact
             </Button>
         </Form>
     );
 };
 
 
-export default ContactForm;
-
+export default PatchContactForm;

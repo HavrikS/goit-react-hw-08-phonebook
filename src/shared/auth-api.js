@@ -16,16 +16,19 @@ export const signup = async user => {
     setToken(data.token);
     return data;
 };
+
 export const login = async user => {
     const { data } = await instance.post('users/login', user);
     setToken(data.token);
     return data;
 };
+
 export const logout = async () => {
     const { data } = await instance.post('users/logout');
     setToken();
     return data;
 };
+
 export const current = async token => {
     try {
         setToken(token);

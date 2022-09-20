@@ -38,3 +38,15 @@ export const removeContact = createAsyncThunk(
         }
     }
 )
+
+export const patchContact = createAsyncThunk(
+    "contacts/patch",
+    async(data, {rejectWithValue}) => {
+        try {
+            const result = await api.patchContact(data);
+            return result;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    },
+)

@@ -2,7 +2,7 @@ import React from 'react'
 import Loader from 'components/Loader/Loader'
 import {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeContact, fetchContacts } from '../../redux/contacts/contacts-operations';
+import { fetchContacts } from '../../redux/contacts/contacts-operations';
 import { getContacts, getLoading } from '../../redux/contacts/contacts-selectors';
 import { getFilter } from '../../redux/filter/filter-selectors';
 import ContactListItem from 'components/ContactListItem/ContactListItem'
@@ -28,9 +28,7 @@ const ContactList = () => {
         return reduxContacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter))
     }
 
-    const deleteContact = Id => {
-        dispatch(removeContact(Id))
-    };
+    
 
     const visibleContacts = getVisibleContacts()
 
@@ -47,7 +45,7 @@ const ContactList = () => {
                 </thead>
                 <tbody>
                     {visibleContacts.map((visibleContact) =>
-                        <ContactListItem key={visibleContact.id} data={visibleContact} deleteContact={deleteContact} />)}
+                        <ContactListItem key={visibleContact.id} data={visibleContact} />)}
                 </tbody>
             </Table>
         </>
