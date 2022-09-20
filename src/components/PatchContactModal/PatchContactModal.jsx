@@ -12,7 +12,7 @@ function PatchContactModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          To change a contact, fill in all fields
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
