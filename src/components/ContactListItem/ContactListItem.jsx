@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { BsFillPencilFill, BsXLg } from "react-icons/bs";
 import PatchContactModal from '../PatchContactModal/PatchContactModal'
+import styles from './ContactListItem.module.css';
 
 
 
@@ -27,12 +28,12 @@ const ContactListItem = ({ data }) => {
                 <td>{name}</td>
                 <td>{number}</td>
                 <td>
-                    <Button variant="outline-warning" id={id} size="sm" type='button' onClick={() => setModalShow(true)}><BsFillPencilFill /></Button>
+                    <Button className={styles.putchButton} variant="outline-warning" id={id} size="sm" type='button' onClick={() => setModalShow(true)}><BsFillPencilFill /></Button>
                     <Button variant="outline-danger" size="sm" onClick={() => deleteContact(id)} type='button'><BsXLg /></Button>
                 </td>
             </tr>
             <PatchContactModal
-                contactid={id}
+                data={data}
                 show={modalShow}                
                 onHide={() => setModalShow(false)}
             />

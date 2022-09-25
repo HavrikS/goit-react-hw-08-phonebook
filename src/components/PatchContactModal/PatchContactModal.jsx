@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import PatchContactForm from '../PatchContactForm/PatchContactForm';
 
 function PatchContactModal(props) {
+
   return (
     <Modal
       {...props}
@@ -16,7 +17,7 @@ function PatchContactModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-              <PatchContactForm onHide={props.onHide} contactId={props.contactid} />
+              <PatchContactForm onHide={props.onHide} data={props.data} />
       </Modal.Body>
     </Modal>
   );
@@ -24,3 +25,5 @@ function PatchContactModal(props) {
 
 
 export default PatchContactModal;
+
+

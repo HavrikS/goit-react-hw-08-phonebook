@@ -12,9 +12,12 @@ const PatchContactForm = (props) => {
 
     const dispatch = useDispatch()
 
+    const { number, id } = props.data
 
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
+
+
+    const [name, setName] = useState(props.data.name);
+    const [phone, setPhone] = useState(number);
 
     const handleChange = ({ target: { name, value } }) => {
         switch (name) {
@@ -51,7 +54,7 @@ const PatchContactForm = (props) => {
 
     return (
 
-        <Form  onSubmit={(event) => handleSubmit(event, props.contactId)}>
+        <Form  onSubmit={(event) => handleSubmit(event, id)}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
                 <Form.Control type="text" value={name} name="name" placeholder="Enter name" onChange={handleChange} pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$" required/>
